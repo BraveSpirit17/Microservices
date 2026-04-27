@@ -1,11 +1,17 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using UserApi;
 using UserApi.Repositories;
 using UserApi.Services;
+using UserApi.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddValidatorsFromAssemblyContaining<UserValidator>();
+builder.Services.AddFluentValidationAutoValidation();
 
 builder.Services.AddDbContext<UserContext>();
 
